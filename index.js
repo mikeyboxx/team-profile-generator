@@ -1,14 +1,13 @@
 
-const chalk = require('chalk');
-const inquirer = require('inquirer');
+const fs = require('fs');
 const Team = require('./lib/Team.js');
-
 
 const team = new Team();
 
 team.buildTeam()
     .then(()=>{
         console.log(team.toString());
+        fs.writeFile('./dist/index.html', team.html, (err=>console.log(err)));
     });
 
 
