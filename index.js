@@ -1,44 +1,63 @@
 
 const chalk = require('chalk');
 const inquirer = require('inquirer');
-const Employee = require('./lib/Employee.js');
-const Manager = require('./lib/Manager.js');
-const Intern = require('./lib/Intern.js');
-const Engineer = require('./lib/Engineer.js');
-
-// Prompt for Manager Info (name, email)
-
-
+// const Manager = require('./lib/Manager.js');
+// const Intern = require('./lib/Intern.js');
+// const Engineer = require('./lib/Engineer.js');
+const Team = require('./lib/Team.js');
+// const promptInput = require('./src/promptInput.js');
+// const promptList = require('./src/promptList.js');
 
 
+const team = new Team();
+
+team.buildTeam();
 
 
+// (async function buildTeam(){
+//     const employees = [];
 
-// const mike = new Employee('mike', '01', 'zzz_dsdds');
-// const joe = new Employee('joe', '02', 'yyy_dsdds');
-// const stella = new Employee('stella', 'www_03', 'dsdds');
-// const bob = new Employee('bob', '04', 'fff__dsdds');
+//     const name =  await promptInput("Please Enter the Manager's Name:\n", true);
+//     const email =  await promptInput("Please Enter the Manager's Email:\n", true);
+//     const officeNumber = await promptInput("Please Enter the Manager's Office Number:\n", true);
+    
+//     employees.push(new Manager(name, email, officeNumber));
+//     console.log(`Manager added successfully!\nid = ${employees[0].getId()}\n\n`);
+    
+//     let choice = '';
+    
+//     while (choice !== 'Finish building my team'){
+//         choice = await promptList("Which team member would you like to add to the team?", ['Engineer', 'Intern', 'Finish building my team']);
+        
+//         if (choice==='Engineer'){
+//             const name =  await promptInput("Please Enter the Engineer's Name:\n", true);
+//             const email =  await promptInput("Please Enter the Engineer's Email:\n", true);
+//             const gitHub = await promptInput("Please Enter the Engineer's GitHub username:\n", true);
+//             employees.push(new Engineer(name, email, gitHub));
+//             console.log(`Engineer added successfully!\nid = ${employees[employees.length-1].getId()}\n\n`);
+//         }
+//         else if (choice==='Intern'){
+//             const name =  await promptInput("Please Enter the Intern's Name:\n", true);
+//             const email =  await promptInput("Please Enter the Intern's Email:\n", true);
+//             const school = await promptInput("Please Enter the Intern's School name:\n", true);
+//             employees.push(new Intern(name, email, school));
+//             console.log(`Intern added successfully!\nid = ${employees[employees.length-1].getId()}\n\n`);
 
-// const walter = new Manager('walter', '05', 'fff__dsdds', '67674');
-// const intern1 = new Intern('intern1', '06', 'fff__dsddf77s', '99994');
-// const engineer1 = new Engineer('Engineer1', '07', 'fxxxx_xxxxxs', 'mikeyboxx');
+//         } else break;
+//     }
 
+//     console.log('Id' + '\t' + 'Name' + '\t' + 'Email' + '\t' + 'Role');
+//     console.log('-----------------------' + '\t' + '------------' + '\t' + '----------------' + '\t' + '---------');
+//     for(const employee of employees)
+//         console.log(employee.getId() + '\t' + employee.getName() + '\t' + employee.getEmail() + '\t' + employee.getRole());
+// });
 
-// console.log(
-//     walter.getName(),
-//     walter.getId(),
-//     walter.getEmail(),
-//     walter.getRole(),
-//     walter.getOfficeNumber());
-// console.log(
-//     intern1.getName(),
-//     intern1.getId(),
-//     intern1.getEmail(),
-//     intern1.getRole(),
-//     intern1.getSchool());
-// console.log(
-//     engineer1.getName(),
-//     engineer1.getId(),
-//     engineer1.getEmail(),
-//     engineer1.getRole(),
-//     engineer1.getGitHub());
+// A) Prompt for Manager Info (name, email)
+//    validate input - if not valid prompt again
+//    generate Manager object
+//    add to employees array
+//
+// B) Prompt to add Engineer, Intern, or finish building my team.
+//    if Engineer is selected then Prompt for name, emal, and github username, return to menu B
+//    if Intern is selected then Prompt for name, email, and school, return to menu B
+//    if Finish is selected then HTML is generated and saved in same directory 
