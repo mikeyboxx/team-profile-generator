@@ -5,10 +5,10 @@ const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Intern = require('./lib/Intern.js');
 const Engineer = require('./lib/Engineer.js');
-const {v4: uuidv4} = require("uuid");
 
-console.log(uuidv4());
-// Get Manager Info
+// Prompt for Manager Info (name, email)
+
+
 
 
 
