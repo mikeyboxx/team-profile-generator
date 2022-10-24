@@ -5,10 +5,11 @@ const Team = require('./lib/Team.js');
 const team = new Team();
 
 team.buildTeam()
-    .then(()=>{
-        console.log(team.toString());
-        fs.writeFile('./dist/index.html', team.html, (err=>console.log(err)));
-    });
+    .then(()=>
+        fs.writeFile('./dist/index.html', team.html, (err=>console.log(err))));
+    // .then(()=>process.exit(0));
+
+
 
 
 // A) Prompt for Manager Info (name, email)
