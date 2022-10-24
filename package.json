@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --waitAll",
+    "test": "jest --watchAll",
     "start": "node index"
   },
   "keywords": [],
