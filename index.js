@@ -1,14 +1,24 @@
 
+const chalk = require('chalk');
 const fs = require('fs');
 const Team = require('./lib/Team.js');
 
 const team = new Team();
 
 team.buildTeam()
-    .then(()=>
-        fs.writeFile('./dist/index.html', team.html, (err=>console.log(err))));
-    // .then(()=>process.exit(0));
-
+    .then(()=>{
+        fs.writeFile('./dist/index.html', team.getHTML(), (err=> {
+            if (err)
+                console.log(err);
+            else { 
+                console.clear();
+                console.log(chalk.green(`\n\nYour Team Profile has been generated!`));
+                console.log(chalk.green(`./dist/index.html file has been created!`));
+                console.log(chalk.yellow(`\nTeam Members in the index.html file:\n`));
+                console.log(chalk.blue(team.toString()));
+            }
+        }));
+    });
 
 
 
