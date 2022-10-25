@@ -6,10 +6,11 @@ const promptInput = function (message, required = false) {
         name: "val",
         type: "input",
         message: message,
+        // Inquirer will prompt user again if a string is returned, otherwise it should return true
         validate: input => (input.length > 0 || !required) ||  'This field is required. Please try again...' 
     }])
-    .then(answer => answer.val);
+    .then(answer => answer.val);  // user input data
 }
 
 
-module.exports = promptInput;  // export the function
+module.exports = promptInput;  

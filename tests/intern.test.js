@@ -1,24 +1,26 @@
 const {v4: uuidv4} = require("uuid");
 const Intern = require('../lib/Intern.js');
 
+// override/intercept the behavior of uuid. We do not want to generate a unique id for the tests
 jest.mock("uuid");
 
 describe("Intern", () => {
+    // setup test data used by some tests (i.e ARRANGE)
+    const name = "Mike";
+    const email = "happyanddebtfree@gmail.com";
+    const school = 'Brooklyn College';
+    uuidv4.mockReturnValue('123456789');
+    const employee = new Intern(name, email, school);
+    
     describe("Initialization", () => {
         it("should create an object with a name, email, school, and a generated id being private, and only accessed through getters", () => {
-        const name = "Mike";
-        const email = "happyanddebtfree@gmail.com";
-        const school = 'Brooklyn College';
-
-        uuidv4.mockReturnValue('123456789');
-
-        const employee = new Intern(name, email, school);
-        
+        // this tests the getters
         expect(employee.getName()).toEqual(name);
         expect(employee.getEmail()).toEqual(email);
         expect(employee.getId()).toEqual('123456789');
         expect(employee.getSchool()).toEqual(school);
 
+        // this tests the private fields. they should be 'invisible'
         expect(employee.name).toEqual(undefined);
         expect(employee.email).toEqual(undefined);
         expect(employee.id).toEqual(undefined);
@@ -73,4 +75,16 @@ describe("Intern", () => {
 
         expect(cb).toThrowError(err);
     });  
+
+    describe("getSchool()", () => {
+        it("should always return Brooklyn College", () => {
+            expect(employee.getSchool()).toEqual(school);
+        });
+    });
+
+    describe("getRole()", () => {
+        it("should always return type 'Engineer'", () => {
+            expect(employee.getRole()).toEqual('Intern');
+        });
+    });
 });

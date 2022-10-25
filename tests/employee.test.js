@@ -1,21 +1,24 @@
 const {v4: uuidv4} = require("uuid");
 const Employee = require('../lib/Employee.js');
 
+// override/intercept the behavior of uuid. We do not want to generate a unique id for the tests
 jest.mock("uuid");
 
 describe("Employee", () => {
+    // setup test data used by some tests (i.e ARRANGE)
+    const name = "Mike";
+    const email = "happyanddebtfree@gmail.com";
+    uuidv4.mockReturnValue('123456789');
+    const employee = new Employee(name, email);
+    
     describe("Initialization", () => {
         it("should create an object with a name, email, and a generated id being private, and only accessed through getters", () => {
-            const name = "Mike";
-            const email = "happyanddebtfree@gmail.com";
-            uuidv4.mockReturnValue('123456789');
-
-            const employee = new Employee(name, email);
-            
+            // this tests the getters
             expect(employee.getName()).toEqual(name);
             expect(employee.getEmail()).toEqual(email);
             expect(employee.getId()).toEqual('123456789');
 
+            // this tests the private fields. they should be 'invisible'
             expect(employee.name).toEqual(undefined);
             expect(employee.email).toEqual(undefined);
             expect(employee.id).toEqual(undefined);
@@ -59,24 +62,12 @@ describe("Employee", () => {
 
     describe("getRole()", () => {
         it("should always return type 'Employee'", () => {
-            const name = "Mike";
-            const email = "happyanddebtfree@gmail.com";
-            uuidv4.mockReturnValue('123456789');
-
-            const employee = new Employee(name, email);
-
             expect(employee.getRole()).toEqual('Employee');
         });
     });
 
     describe("toString()", () => {
         it("should always return a formatted string of all properties and their values", () => {
-            const name = "Mike";
-            const email = "happyanddebtfree@gmail.com";
-            uuidv4.mockReturnValue('123456789');
-
-            const employee = new Employee(name, email);
-
             expect(employee.toString())
                 .toEqual(`id:   \t\t${employee.getId()}\n` +
                         `name: \t\t${employee.getName()}\n` +
